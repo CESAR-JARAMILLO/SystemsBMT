@@ -1,3 +1,5 @@
+import { BeltRank } from "./enums";
+
 interface Reference {
   title: string;
   url: string;
@@ -6,6 +8,7 @@ interface Reference {
 interface Combo {
   title: string;
   moves: string[];
+  belt_requirement?: BeltRank;
   references?: Reference[];
 }
 
@@ -27,7 +30,8 @@ const combos: ComboCategory[] = [
           "#3 jab, cross, lead hook",
           "#4 jab, cross, lead hook, cross",
           "#5 jab, cross, lead upper-cut, cross, lead hook"
-        ]
+        ],
+        belt_requirement: BeltRank.White
       },
       {
         title: "#'s 6-11 Hands",
@@ -38,7 +42,8 @@ const combos: ComboCategory[] = [
           "#9 lead upper-cut, cross, lead hook",
           "#10 cross, lead hook, rear upper-cut",
           "#11 lead hook, cross, lead upper-cut"
-        ]
+        ],
+        belt_requirement: BeltRank.Yellow
       }
     ]
   },
@@ -47,7 +52,8 @@ const combos: ComboCategory[] = [
     combos: [
       {
         title: "Sticks Combination",
-        moves: ["Jab, rear upper-cut, lead hook, rear body-kick"]
+        moves: ["Jab, rear upper-cut, lead hook, rear body-kick"],
+        belt_requirement: BeltRank.White
       },
       {
         title: "Advance Sticks Combination",
@@ -73,7 +79,8 @@ const combos: ComboCategory[] = [
         moves: [
           "Jab, cross, lead hook",
           "Reload for lead body, reload for lead hook, rear low-kick"
-        ]
+        ],
+        belt_requirement: BeltRank.Yellow
       }
     ],
     references: [
@@ -92,7 +99,8 @@ const combos: ComboCategory[] = [
     combos: [
       {
         title: "Hemmers Combination",
-        moves: ["Lead hook, rear hook, lead hook", "Rear body, lead body", "Lead hook, rear hook, lead hook"]
+        moves: ["Lead hook, rear hook, lead hook", "Rear body, lead body", "Lead hook, rear hook, lead hook"],
+        belt_requirement: BeltRank.Yellow
       },
       {
         title: "Hemmers Combination Variation",
@@ -121,7 +129,8 @@ const combos: ComboCategory[] = [
           "Cross, lead body-kick",
           "Cross, lead hook, rear low-kick",
           "Lead hook, cross, lead head-kick"
-        ]
+        ],
+        belt_requirement: BeltRank.Yellow
       }
     ],
     references: [
@@ -147,7 +156,8 @@ const combos: ComboCategory[] = [
           "Jab, rear hook",
           "Jab, cross",
           "Jab, rear upper-cut"
-        ]
+        ],
+        belt_requirement: BeltRank.Yellow
       },
       {
         title: "2:30 Variation",
@@ -181,7 +191,8 @@ const combos: ComboCategory[] = [
           "Lead body, rear body",
           "Reload for rear upper-cut, lead hook, cross",
           "Two lead body-kicks"
-        ]
+        ],
+        belt_requirement: BeltRank.Yellow
       },
       {
         title: "New Dekkers Combination",
@@ -214,7 +225,8 @@ const combos: ComboCategory[] = [
         moves: [
           "Cross, lead knee (step forward or switch), land forward after knee",
           "Lead hook, cross"
-        ]
+        ],
+        belt_requirement: BeltRank.Orange
       },
       {
         title: "Reem Setup Variation",
@@ -250,7 +262,8 @@ const combos: ComboCategory[] = [
           "Jab, jab, cross",
           "Jab, lead hook, cross",
           "Lead hook, jab, cross"
-        ]
+        ],
+        belt_requirement: BeltRank.Orange
       }
     ],
     references: [
@@ -273,7 +286,8 @@ const combos: ComboCategory[] = [
           "Jab",
           "Jab to chest",
           "Overhand"
-        ]
+        ],
+        belt_requirement: BeltRank.Orange
       },
       {
         title: "2 Body",
@@ -281,7 +295,8 @@ const combos: ComboCategory[] = [
           "Jab",
           "Cross to belly",
           "Lead Hook"
-        ]
+        ],
+        belt_requirement: BeltRank.Orange
       }
     ]
   },
@@ -294,7 +309,8 @@ const combos: ComboCategory[] = [
           "Switch cross",
           "Lead hook",
           "Rear body-kick"
-        ]
+        ],
+        belt_requirement: BeltRank.Orange
       }
     ]
   },
@@ -308,7 +324,8 @@ const combos: ComboCategory[] = [
           "Rear-upper",
           "Liver",
           "Rear low-kick"
-        ]
+        ],
+        belt_requirement: BeltRank.Orange
       }
     ]
   },
@@ -323,7 +340,8 @@ const combos: ComboCategory[] = [
           "Rear over-head, rear over-head",
           "Rear hook, rear hook",
           "Rear upper-cut, rear upper-cut"
-        ]
+        ],
+        belt_requirement: BeltRank.Orange
       }
     ],
     references: [
@@ -346,7 +364,8 @@ const combos: ComboCategory[] = [
           "Lead-body, Rear-body (reload for rear-upper)",
           "Rear-upper, Lead-hook, Cross",
           "Lead inside-kick, Lead body-kick"
-        ]
+        ],
+        belt_requirement: BeltRank.Blue
       }
     ]
   },
@@ -360,7 +379,8 @@ const combos: ComboCategory[] = [
           "Jab, Pull, Cross",
           "Quick Jab-Cross",
           "Plays with different striking speeds. 'Pull' is a step back to draw opponent in and return with cross leading into a quick jab-cross"
-        ]
+        ],
+        belt_requirement: BeltRank.Blue
       }
     ]
   },
@@ -374,7 +394,8 @@ const combos: ComboCategory[] = [
           "Check (evades opponents cross)",
           "Lead-hook, Cross",
           "For 'Check' evade opponents cross by stepping towards lead-foot side and throw hook as you land on lead-foot"
-        ]
+        ],
+        belt_requirement: BeltRank.Blue
       }
     ]
   },
