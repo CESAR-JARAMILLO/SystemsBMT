@@ -12,9 +12,17 @@ export async function login(formData: FormData) {
     password: formData.get('password') as string,
   }
 
-  const { error } = await supabase.auth.signInWithPassword(data)
+  const { data: loginData, error } = await supabase.auth.signInWithPassword(data)
   if (error) {
     redirect('/error')
+  }
+
+  // If login was successful, update last_logged_in in the profiles table
+  if (loginData?.user) {
+    await supabase
+      .from('profiles')
+      .update({ last_logged_in: new Date().toISOString() })
+      .eq('id', loginData.user.id)
   }
 
   revalidatePath('/')
@@ -24,14 +32,34 @@ export async function login(formData: FormData) {
 export async function signup(formData: FormData) {
   const supabase = await createClient()
 
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  }
+  // Extract values from the form
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
+  const firstName = formData.get('firstName') as string
+  const phone = (formData.get('phone') as string) || null
+  // Checkbox returns a value only when checked, so we convert it to a boolean
+  const marketingConsent = formData.get('marketingConsent') ? true : false
 
-  const { error } = await supabase.auth.signUp(data)
+  // Create the user via Supabase Auth
+  const { error, data } = await supabase.auth.signUp({ email, password })
   if (error) {
     redirect('/error')
+  }
+
+  // If a user is successfully created, insert a corresponding profile
+  if (data && data.user) {
+    const { error: profileError } = await supabase.from('profiles').insert([
+      {
+        id: data.user.id,
+        email,
+        first_name: firstName,
+        phone,
+        marketing_consent: marketingConsent,
+      },
+    ])
+    if (profileError) {
+      redirect('/error')
+    }
   }
 
   revalidatePath('/')
