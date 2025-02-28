@@ -33,6 +33,35 @@ const combos: ComboCategory[] = [
         ],
         belt_requirement: BeltRank.White
       },
+    ]
+  },
+  {
+    category: "Sticks Combos",
+    combos: [
+      {
+        title: "Sticks Combination",
+        moves: ["Jab, rear upper-cut, lead hook, rear body-kick"],
+        belt_requirement: BeltRank.White
+      },
+      // {
+      //   title: "Advance Sticks Combination",
+      //   moves: ["Switch-jab, rear upper-cut, lead hook, rear body-kick"]
+      // },
+      // {
+      //   title: "Sticks Combination Counter - One Variation",
+      //   moves: ["Lead inside-kick, rear over-head, lead body, rear kick (low, body, or head)"]
+      // }
+    ],
+    references: [
+      {
+        title: "Reviewing the Sticks Combo and Countering",
+        url: "https://www.youtube.com/watch?v=uXJoA42aPuk&t=30s"
+      }
+    ]
+  },
+  {
+    category: "Hand Combos",
+    combos: [
       {
         title: "#'s 6-11 Hands",
         moves: [
@@ -44,30 +73,6 @@ const combos: ComboCategory[] = [
           "#11 lead hook, cross, lead upper-cut"
         ],
         belt_requirement: BeltRank.Yellow
-      }
-    ]
-  },
-  {
-    category: "Sticks Combos",
-    combos: [
-      {
-        title: "Sticks Combination",
-        moves: ["Jab, rear upper-cut, lead hook, rear body-kick"],
-        belt_requirement: BeltRank.White
-      },
-      {
-        title: "Advance Sticks Combination",
-        moves: ["Switch-jab, rear upper-cut, lead hook, rear body-kick"]
-      },
-      {
-        title: "Sticks Combination Counter - One Variation",
-        moves: ["Lead inside-kick, rear over-head, lead body, rear kick (low, body, or head)"]
-      }
-    ],
-    references: [
-      {
-        title: "Reviewing the Sticks Combo and Countering",
-        url: "https://www.youtube.com/watch?v=uXJoA42aPuk&t=30s"
       }
     ]
   },
@@ -102,15 +107,15 @@ const combos: ComboCategory[] = [
         moves: ["Lead hook, rear hook, lead hook", "Rear body, lead body", "Lead hook, rear hook, lead hook"],
         belt_requirement: BeltRank.Yellow
       },
-      {
-        title: "Hemmers Combination Variation",
-        moves: [
-          "Lead hook, rear hook, lead hook",
-          "Rear body, lead body",
-          "Lead hook, rear hook, lead hook",
-          "Lead inside-kick, lead body-kick"
-        ]
-      }
+      // {
+      //   title: "Hemmers Combination Variation",
+      //   moves: [
+      //     "Lead hook, rear hook, lead hook",
+      //     "Rear body, lead body",
+      //     "Lead hook, rear hook, lead hook",
+      //     "Lead inside-kick, lead body-kick"
+      //   ]
+      // }
     ],
     references: [
       {
@@ -159,14 +164,14 @@ const combos: ComboCategory[] = [
         ],
         belt_requirement: BeltRank.Yellow
       },
-      {
-        title: "2:30 Variation",
-        moves: [
-          "Jab, cross, step back",
-          "Jab, jab, rear over-head",
-          "Lead low-kick"
-        ]
-      }
+      // {
+      //   title: "2:30 Variation",
+      //   moves: [
+      //     "Jab, cross, step back",
+      //     "Jab, jab, rear over-head",
+      //     "Lead low-kick"
+      //   ]
+      // }
     ],
     references: [
       {
@@ -194,6 +199,44 @@ const combos: ComboCategory[] = [
         ],
         belt_requirement: BeltRank.Yellow
       },
+      // {
+      //   title: "New Dekkers Combination",
+      //   moves: [
+      //     "Jab, cross",
+      //     "Reload for cross, lead hook",
+      //     "Reload for lead hook, cross (drop on the cross a little)",
+      //     "Lead body, rear body",
+      //     "Reload for rear upper-cut, lead hook, cross",
+      //     "Lead inside-kick, lead high-kick"
+      //   ]
+      // },
+      // {
+      //   title: "Dekkers Combination Defensive Variations",
+      //   moves: ["Combination is the same except with replacing reloads with slips, or rolls."]
+      // }
+    ],
+    references: [
+      {
+        title: "Kickboxing For MMA: Dekkers Combination",
+        url: "https://www.youtube.com/watch?v=GclBhgtT8uQ&t=64s"
+      }
+    ]
+  },
+  {
+    category: "Dekkers Combos",
+    combos: [
+      // {
+      //   title: "Dekkers Combination",
+      //   moves: [
+      //     "Jab, cross",
+      //     "Reload for cross, lead hook",
+      //     "Reload for lead hook, cross (drop on the cross a little)",
+      //     "Lead body, rear body",
+      //     "Reload for rear upper-cut, lead hook, cross",
+      //     "Two lead body-kicks"
+      //   ],
+      //   belt_requirement: BeltRank.Yellow
+      // },
       {
         title: "New Dekkers Combination",
         moves: [
@@ -203,12 +246,13 @@ const combos: ComboCategory[] = [
           "Lead body, rear body",
           "Reload for rear upper-cut, lead hook, cross",
           "Lead inside-kick, lead high-kick"
-        ]
+        ],
+        belt_requirement: BeltRank.Yellow
       },
-      {
-        title: "Dekkers Combination Defensive Variations",
-        moves: ["Combination is the same except with replacing reloads with slips, or rolls."]
-      }
+      // {
+      //   title: "Dekkers Combination Defensive Variations",
+      //   moves: ["Combination is the same except with replacing reloads with slips, or rolls."]
+      // }
     ],
     references: [
       {
@@ -228,6 +272,43 @@ const combos: ComboCategory[] = [
         ],
         belt_requirement: BeltRank.Orange
       },
+      // {
+      //   title: "Reem Setup Variation",
+      //   moves: [
+      //     "Lead hook, low-kick",
+      //     "Cross, lead knee (step forward or switch), land forward after knee",
+      //     "Lead hook, cross, lead hook",
+      //     "Rear high-kick"
+      //   ],
+      //   belt_requirement: BeltRank.Orange
+      // }
+    ],
+    references: [
+      {
+        title: "How To Drill Reems & Returns",
+        url: "https://www.youtube.com/watch?v=QbGz4xWVXTQ&t=36s"
+      },
+      {
+        title: "Cross Reem / Bang Muay Thai / Kickboxing For MMA / 2020",
+        url: "https://www.youtube.com/watch?v=-8PgdG8Vfs0"
+      },
+      {
+        title: "Reem Set Up / Kickboxing For MMA / 2020",
+        url: "https://www.youtube.com/watch?v=QmkDD6i3r4M"
+      }
+    ]
+  },
+  {
+    category: "Reem Drill Combos",
+    combos: [
+      // {
+      //   title: "Reem Drill",
+      //   moves: [
+      //     "Cross, lead knee (step forward or switch), land forward after knee",
+      //     "Lead hook, cross"
+      //   ],
+      //   belt_requirement: BeltRank.Orange
+      // },
       {
         title: "Reem Setup Variation",
         moves: [
@@ -235,7 +316,8 @@ const combos: ComboCategory[] = [
           "Cross, lead knee (step forward or switch), land forward after knee",
           "Lead hook, cross, lead hook",
           "Rear high-kick"
-        ]
+        ],
+        belt_requirement: BeltRank.Orange
       }
     ],
     references: [
@@ -278,7 +360,7 @@ const combos: ComboCategory[] = [
     ]
   },
   {
-    category: "One Body Two Body Combos",
+    category: "One Body Combo",
     combos: [
       {
         title: "1 Body",
@@ -289,6 +371,29 @@ const combos: ComboCategory[] = [
         ],
         belt_requirement: BeltRank.Orange
       },
+      // {
+      //   title: "2 Body",
+      //   moves: [
+      //     "Jab",
+      //     "Cross to belly",
+      //     "Lead Hook"
+      //   ],
+      //   belt_requirement: BeltRank.Orange
+      // }
+    ]
+  },
+  {
+    category: "Two Body Combo",
+    combos: [
+      // {
+      //   title: "1 Body",
+      //   moves: [
+      //     "Jab",
+      //     "Jab to chest",
+      //     "Overhand"
+      //   ],
+      //   belt_requirement: BeltRank.Orange
+      // },
       {
         title: "2 Body",
         moves: [

@@ -34,19 +34,21 @@ const CombosCardSection: React.FC = () => {
     .filter((category) => category.combos.length > 0);
 
   return (
-    <Box>
+    <Box className={styles.cardSection}>
       <TextInput
+        className={styles.searchInput}
         placeholder="Search combos"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.currentTarget.value)}
         mb="md"
       />
-      <SegmentedControl
-        data={beltOptions}
-        value={selectedBelt}
-        onChange={setSelectedBelt}
-        mb="md"
-      />
+      <Box className={styles.segmentControlContainer}>
+        <SegmentedControl
+          data={beltOptions}
+          value={selectedBelt}
+          onChange={setSelectedBelt}
+        />
+      </Box>
       <Box className={styles.container}>
         {filteredCombos.map((category, index) => (
           <CombosCard key={index} category={category} />

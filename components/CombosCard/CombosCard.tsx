@@ -29,14 +29,16 @@ const CombosCard: React.FC<CombosCardProps> = ({ category }) => {
         <Text className={styles.categoryTitle}>{category.category}</Text>
       </Box>
       {category.combos.map((combo, comboIndex: number) => (
-        <Box key={comboIndex} className={styles.comboItem}>
+        <Box key={comboIndex} className={styles.cardBody}>
           {combo.belt_requirement && (
             <Badge
               className={`${styles.beltBadge} ${getBeltBadgeClass(
                 combo.belt_requirement
               )}`}
             >
-              {combo.belt_requirement.toUpperCase()}
+              {combo.belt_requirement
+                ? `${combo.belt_requirement.toUpperCase()} BELT REQUIREMENT`
+                : "No requirement"}
             </Badge>
           )}
           <Text className={styles.comboTitle}>{combo.title}</Text>

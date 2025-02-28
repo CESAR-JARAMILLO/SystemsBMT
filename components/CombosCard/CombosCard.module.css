@@ -1,4 +1,6 @@
 .comboCard {
+  max-width: 360px;
+  padding-bottom: 16px;
   border: none;
   border-radius: 8px;
   overflow: hidden;
@@ -35,10 +37,10 @@
   width: 100%;
 }
 
-.comboItem {
+/* .comboItem {
   margin-bottom: 16px;
   width: 100%;
-}
+} */
 
 .comboTitle {
   text-transform: uppercase;
@@ -75,12 +77,13 @@
 
 /* Belt Badge Styling */
 .beltBadge {
-  padding: 4px 8px;
-  border-radius: 4px;
+  /* padding: 4px 8px; */
+  padding: 12px;
+  border-radius: 8px;
   font-weight: bold;
   margin-bottom: 8px;
   text-transform: uppercase;
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 .beltWhite {
