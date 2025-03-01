@@ -35,6 +35,14 @@ const CombosCardSection: React.FC = () => {
 
   return (
     <Box className={styles.cardSection}>
+      <Box className={styles.segmentControlContainer}>
+        <SegmentedControl
+          data={beltOptions}
+          value={selectedBelt}
+          onChange={setSelectedBelt}
+          mb="md"
+        />
+      </Box>
       <TextInput
         className={styles.searchInput}
         placeholder="Search combos"
@@ -42,13 +50,6 @@ const CombosCardSection: React.FC = () => {
         onChange={(e) => setSearchQuery(e.currentTarget.value)}
         mb="md"
       />
-      <Box className={styles.segmentControlContainer}>
-        <SegmentedControl
-          data={beltOptions}
-          value={selectedBelt}
-          onChange={setSelectedBelt}
-        />
-      </Box>
       <Box className={styles.container}>
         {filteredCombos.map((category, index) => (
           <CombosCard key={index} category={category} />

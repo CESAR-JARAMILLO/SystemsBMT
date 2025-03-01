@@ -1,6 +1,9 @@
+// pages/admin-dashboard.tsx
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { Box, Table, Title } from "@mantine/core";
+import { Box, Title } from "@mantine/core";
+import AdminTable from "@/components/Admin/AdminTable";
+import styles from "./page.module.css";
 
 export default async function AdminDashboard() {
   const supabase = await createClient();
@@ -35,36 +38,9 @@ export default async function AdminDashboard() {
   }
 
   return (
-    <Box p="md">
+    <Box className={styles.adminDasboardPage}>
       <Title order={2}>Admin Dashboard</Title>
-      <Table highlightOnHover striped>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Belt Level</th>
-            <th>Created At</th>
-            <th>Last Logged In</th>
-          </tr>
-        </thead>
-        <tbody>
-          {profiles.map((profile: any) => (
-            <tr key={profile.id}>
-              <td>{profile.first_name}</td>
-              <td>{profile.email}</td>
-              <td>{profile.phone || "N/A"}</td>
-              <td>{profile.belt_level}</td>
-              <td>{new Date(profile.created_at).toLocaleString()}</td>
-              <td>
-                {profile.last_logged_in
-                  ? new Date(profile.last_logged_in).toLocaleString()
-                  : "Never"}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <AdminTable profiles={profiles} />
     </Box>
   );
 }
