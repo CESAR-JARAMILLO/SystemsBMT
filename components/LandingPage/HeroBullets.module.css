@@ -1,0 +1,155 @@
+.inner {
+  display: flex;
+  justify-content: space-between;
+  padding-top: calc(var(--mantine-spacing-xl) * 4);
+  padding-bottom: calc(var(--mantine-spacing-xl) * 4);
+}
+
+.content {
+  max-width: 480px;
+  margin-right: calc(var(--mantine-spacing-xl) * 3);
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    margin-right: 0;
+  }
+}
+
+.title {
+  color: var(--mantine-color-dark-9);
+  font-family:
+    Greycliff CF,
+    var(--mantine-font-family);
+  font-size: 44px;
+  line-height: 1.2;
+  font-weight: 900;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+.highlight {
+  position: relative;
+  background-color: #ff8000; /* Orange highlight */
+  border-radius: 16px;
+  padding: 4px 12px;
+  color: #fff; /* Ensure contrast */
+  font-weight: bold;
+}
+
+.description {
+  color: var(--mantine-color-gray-8);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.listItem {
+  font-size: 16px;
+  color: var(--mantine-color-dark-8);
+  line-height: 1.4;
+}
+
+.listItemTitle {
+  font-size: 18px; /* Only the title part is bigger */
+  font-weight: 700;
+  color: var(--mantine-color-dark-9);
+}
+
+.emailForm {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+  
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack input and button on mobile */
+    gap: 8px;
+  }
+}
+
+.emailInput {
+  flex-grow: 1;
+  max-width: 280px;
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 12px;
+  
+  @media (max-width: 768px) {
+    width: 100%; /* Full width on mobile */
+  }
+}
+
+.emailButton {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #ff8000; /* ✅ Match orange color */
+  color: white;
+  white-space: nowrap; /* Prevent text from wrapping */
+  
+  @media (max-width: 768px) {
+    width: 100%; /* Full width button on mobile */
+  }
+}
+
+.emailButton:hover {
+  background-color: #e67500; /* Slightly darker shade for hover */
+  transform: scale(1.05);
+}
+
+.emailButton:active {
+  background-color: #cc6600;
+  transform: scale(0.98);
+}
+
+
+.image {
+  width: 376px;
+  height: 356px;
+  display: block;
+  border-radius: 16px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.memberLoginButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #ff8000; /* Matches orange theme */
+  border: 2px solid #ff8000;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.memberLoginButton:hover {
+  background-color: #ff8000;
+  color: white;
+  transform: scale(1.05);
+}
+
+.memberLoginButton:active {
+  background-color: #cc6600;
+  transform: scale(0.98);
+}
+
+/* ✅ Make sure it adapts to mobile */
+@media (max-width: 768px) {
+  .memberLoginButton {
+    top: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
