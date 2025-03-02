@@ -28,14 +28,21 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Redirect unauthenticated users to /auth
-  if (!user && !request.nextUrl.pathname.startsWith('/auth')) {
+  // ✅ Allow access to the landing page & public routes
+  const isPublicPage = ["/", "/about", "/contact"].some(path =>
+    request.nextUrl.pathname.startsWith(path)
+  )
+
+  // ✅ Redirect unauthenticated users only if they try to access a protected route
+  const isProtectedRoute = request.nextUrl.pathname.startsWith('/dashboard') || request.nextUrl.pathname.startsWith('/admin-dashboard')
+
+  if (!user && isProtectedRoute) {
     const url = request.nextUrl.clone()
     url.pathname = '/auth'
     return NextResponse.redirect(url)
   }
 
-  // For admin dashboard routes, verify the user is an admin.
+  // ✅ For admin dashboard routes, verify the user is an admin
   if (user && request.nextUrl.pathname.startsWith('/admin-dashboard')) {
     const { data: profileData, error: profileError } = await supabase
       .from('profiles')
@@ -45,7 +52,7 @@ export async function updateSession(request: NextRequest) {
 
     if (profileError || !profileData?.is_admin) {
       const url = request.nextUrl.clone()
-      url.pathname = '/auth'
+      url.pathname = '/dashboard'
       return NextResponse.redirect(url)
     }
   }
