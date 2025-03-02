@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { Box, Text, Button } from "@mantine/core";
+import { Box, Text, Button, CloseButton } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client"; // Import Supabase client
+import { createClient } from "@/utils/supabase/client";
 import styles from "./DashboardNavbar.module.css";
 
-export default function DashboardNavbar() {
+export default function DashboardNavbar({ onClose }: { onClose?: () => void }) {
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -42,16 +42,31 @@ export default function DashboardNavbar() {
 
   return (
     <Box className={styles.navbar}>
-      <Link href="/dashboard" className={styles.navLink}>
+      {/* ✅ Close Button (For Mobile) */}
+      <CloseButton
+        onClick={onClose}
+        className={styles.closeButton}
+        size="lg"
+        aria-label="Close navbar"
+      />
+
+      <Link href="/dashboard" className={styles.navLink} onClick={onClose}>
         <Text>Home</Text>
       </Link>
-      <Link href="/dashboard/combos" className={styles.navLink}>
+      <Link
+        href="/dashboard/combos"
+        className={styles.navLink}
+        onClick={onClose}
+      >
         <Text>Combos</Text>
       </Link>
 
-      {/* Show Admin Dashboard Link if user is an Admin */}
       {isAdmin && (
-        <Link href="/dashboard/admin-dashboard" className={styles.navLink}>
+        <Link
+          href="/dashboard/admin-dashboard"
+          className={styles.navLink}
+          onClick={onClose}
+        >
           <Text>Admin Dashboard</Text>
         </Link>
       )}

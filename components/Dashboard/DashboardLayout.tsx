@@ -18,26 +18,35 @@ export default function DashboardLayout({
         breakpoint: "sm",
         collapsed: { mobile: !opened },
       }}
-      // padding="md"
     >
-      {/* ✅ Header only for mobile */}
-      <AppShell.Header hiddenFrom="sm">
+      {/* ✅ Header (Visible only on mobile) */}
+      <AppShell.Header
+        c={"#fff"}
+        p={16}
+        bg={"#1F2A38"}
+        withBorder={false}
+        hiddenFrom="sm"
+      >
         <Group h="100%" px="md">
           <Burger
+            color={"#fff"}
             opened={opened}
             onClick={() => setOpened(!opened)}
             size="sm"
           />
-          <Text fw={600}>Bang Muay Thai Dashboard</Text>
+          <Text fw={600}>Systems BMT Dashboard</Text>
         </Group>
       </AppShell.Header>
 
-      {/* ✅ Sidebar (Always visible) */}
-      <AppShell.Navbar bg={"#1F2A38"} withBorder={false} p="md">
-        <DashboardNavbar />
+      {/* ✅ Sidebar (Pass close handler to close on click) */}
+      <AppShell.Navbar bg={"#2A3D54"} withBorder={false} p="md">
+        <DashboardNavbar onClose={() => setOpened(false)} />
       </AppShell.Navbar>
 
-      <AppShell.Main bg={"#3A506B"}>{children}</AppShell.Main>
+      {/* ✅ Main Content */}
+      <AppShell.Main pt={32} bg={"#3A506B"}>
+        {children}
+      </AppShell.Main>
     </AppShell>
   );
 }
