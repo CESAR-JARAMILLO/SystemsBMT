@@ -72,13 +72,23 @@
 .control {
   height: 42px;
   font-size: var(--mantine-font-size-md);
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #7895B2; /* Your color */
+  color: white !important; /* Ensures text remains white */
+  border: none;
+  display: inline-block;
 }
 
-.secondaryControl {
-  color: var(--mantine-color-white);
-  background-color: rgba(255, 255, 255, 0.4);
-
-  @mixin hover {
-    background-color: rgba(255, 255, 255, 0.45);
-  }
+.control:hover {
+  background-color: #5B7A99; /* Slightly darker shade for hover effect */
+  transform: scale(1.05);
 }
+
+.control:active {
+  background-color: #4A6984; /* Even darker for active state */
+  transform: scale(0.98);
+}
+
