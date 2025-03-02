@@ -1,8 +1,13 @@
 import CombosCardSection from "@/components/CombosCardSection/CombosCardSection";
+import { Box } from "@mantine/core";
 import React from "react";
 
-const page = () => {
-  return <CombosCardSection />;
+const CombosPage = () => {
+  return (
+    <Box className="main">
+      <CombosCardSection />
+    </Box>
+  );
 };
 
-export default page;
+export default CombosPage;

@@ -41,7 +41,7 @@ export default function AdminTable({ profiles }: AdminTableProps) {
       h={300}
       onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
     >
-      <Table miw={700}>
+      <Table className={styles.table} miw={700}>
         <Table.Thead
           className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}
         >

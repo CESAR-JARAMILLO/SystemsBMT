@@ -2,18 +2,23 @@
   max-width: 400px;
   margin: auto;
   margin-top: 2rem;
-  padding: 1rem;
+  padding: 1.5rem;
+  background-color: #F5F7FA; /* Light contrasting background */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .title {
   text-align: center;
   margin-bottom: 1rem;
+  color: #2B3A4A; /* Darker text for contrast */
 }
 
 .notification {
   margin-bottom: 1rem;
 }
 
+/* Form Styling */
 .form {
   display: flex;
   flex-direction: column;
@@ -21,17 +26,47 @@
 }
 
 .input {
-  /* Additional styling for inputs can go here */
+  background-color: #ffffff; /* White input fields */
+  border: 1px solid #C4D7E0;
+  border-radius: 6px;
 }
 
+/* Checkbox */
 .checkbox {
   margin-top: 0.5rem;
+  color: #2B3A4A; /* Darker text */
 }
 
+/* Submit Button */
 .submitButton {
   margin-top: 1rem;
+  background-color: #7895B2; /* Muted Blue */
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
+.submitButton:hover {
+  background-color: #5B7A99; /* Darker Blue Hover */
+}
+
+/* Toggle Button */
 .toggleButton {
   margin-top: 1rem;
+  color: #2B3A4A;
+  background-color: transparent;
+  font-weight: bold;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.toggleButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .authContainer {
+    width: 90%;
+    padding: 1rem;
+  }
 }

@@ -18,7 +18,7 @@ export default function DashboardLayout({
         breakpoint: "sm",
         collapsed: { mobile: !opened },
       }}
-      padding="md"
+      // padding="md"
     >
       {/* ✅ Header only for mobile */}
       <AppShell.Header hiddenFrom="sm">
@@ -33,11 +33,11 @@ export default function DashboardLayout({
       </AppShell.Header>
 
       {/* ✅ Sidebar (Always visible) */}
-      <AppShell.Navbar p="md">
+      <AppShell.Navbar bg={"#1F2A38"} withBorder={false} p="md">
         <DashboardNavbar />
       </AppShell.Navbar>
 
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main bg={"#3A506B"}>{children}</AppShell.Main>
     </AppShell>
   );
 }

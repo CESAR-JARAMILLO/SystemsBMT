@@ -39,7 +39,9 @@ export default async function AdminDashboard() {
 
   return (
     <Box className={styles.adminDasboardPage}>
-      <Title order={2}>Admin Dashboard</Title>
+      <Title c={"#fff"} order={2}>
+        Admin Dashboard
+      </Title>
       <AdminTable profiles={profiles} />
     </Box>
   );

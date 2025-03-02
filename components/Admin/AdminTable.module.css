@@ -1,7 +1,11 @@
+.table {
+  color: #fff;
+}
+
 .header {
   position: sticky;
   top: 0;
-  background-color: var(--mantine-color-body);
+  /* background-color: var(--mantine-color-body); */
   transition: box-shadow 150ms ease;
 }
 

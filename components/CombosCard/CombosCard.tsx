@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Badge } from "@mantine/core";
+import { Box, Text, Badge, Button } from "@mantine/core";
 import { ComboCategory } from "@/data/combos";
 import styles from "./CombosCard.module.css";
 
@@ -36,9 +36,7 @@ const CombosCard: React.FC<CombosCardProps> = ({ category }) => {
                 combo.belt_requirement
               )}`}
             >
-              {combo.belt_requirement
-                ? `${combo.belt_requirement.toUpperCase()} BELT REQUIREMENT`
-                : "No requirement"}
+              {combo.belt_requirement.toUpperCase()} BELT REQUIREMENT
             </Badge>
           )}
           <Text className={styles.comboTitle}>{combo.title}</Text>
@@ -53,16 +51,21 @@ const CombosCard: React.FC<CombosCardProps> = ({ category }) => {
       ))}
       {category.references && category.references.length > 0 && (
         <Box className={styles.references}>
-          <Text className={styles.referenceTitle}>References:</Text>
-          <ul>
+          <Text className={styles.referenceTitle}>Reference Videos:</Text>
+          <Box className={styles.referenceButtons}>
             {category.references.map((ref, refIndex: number) => (
-              <li key={refIndex}>
-                <a href={ref.url} target="_blank" rel="noopener noreferrer">
-                  {ref.title}
-                </a>
-              </li>
+              <Button
+                key={refIndex}
+                className={styles.referenceButton}
+                component="a"
+                href={ref.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {ref.title}
+              </Button>
             ))}
-          </ul>
+          </Box>
         </Box>
       )}
     </Box>

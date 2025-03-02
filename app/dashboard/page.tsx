@@ -1,7 +1,13 @@
-import React from "react";
+import Hero from "@/components/Dashboard/Hero";
+import { Box } from "@mantine/core";
+import styles from "./page.module.css";
 
-const page = () => {
-  return <div>page</div>;
+const DashboardPage = () => {
+  return (
+    <Box className={styles.main}>
+      <Hero />
+    </Box>
+  );
 };
 
-export default page;
+export default DashboardPage;
