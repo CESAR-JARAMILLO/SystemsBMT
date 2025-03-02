@@ -31,7 +31,7 @@ export function HeroBullets() {
       <Container size="md">
         <div className={styles.inner}>
           <div className={styles.content}>
-            <Title className={styles.title}>
+            <Title order={1} className={styles.title}>
               Get Fit, Learn Self-Defense, <br />
               and{" "}
               <Text
@@ -94,7 +94,7 @@ export function HeroBullets() {
                 size="md"
               />
               <Button radius="xl" size="md" className={styles.emailButton}>
-                Get Started
+                Learn More
               </Button>
             </Group>
           </div>
