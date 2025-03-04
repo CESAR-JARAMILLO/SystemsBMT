@@ -86,7 +86,6 @@ export function HeroBullets() {
               </List.Item>
             </List>
 
-            {/* ✅ Email Input & Button */}
             <Group mt={30} className={styles.emailForm}>
               <TextInput
                 placeholder="Enter your email"
