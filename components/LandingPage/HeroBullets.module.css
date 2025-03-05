@@ -87,17 +87,17 @@
   padding: 12px 24px;
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  background-color: #ff8000; /* ✅ Match orange color */
+  background-color: #ff8000;
   color: white;
-  white-space: nowrap; /* Prevent text from wrapping */
+  white-space: nowrap;
   
   @media (max-width: 768px) {
-    width: 100%; /* Full width button on mobile */
+    width: 100%;
   }
 }
 
 .emailButton:hover {
-  background-color: #e67500; /* Slightly darker shade for hover */
+  background-color: #e67500;
   transform: scale(1.05);
 }
 
@@ -127,7 +127,7 @@
   padding: 10px 20px;
   border-radius: 8px;
   background-color: transparent;
-  color: #ff8000; /* Matches orange theme */
+  color: #ff8000;
   border: 2px solid #ff8000;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
   text-align: center;
@@ -144,7 +144,6 @@
   transform: scale(0.98);
 }
 
-/* ✅ Make sure it adapts to mobile */
 @media (max-width: 768px) {
   .memberLoginButton {
     top: 10px;
