@@ -14,13 +14,32 @@ import { login, signup } from "@/app/auth/action";
 
 const Auth: React.FC = () => {
   const [authMode, setAuthMode] = useState<"sign_in" | "sign_up">("sign_in");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+
+    // Determine which function to use
+    const formAction = authMode === "sign_in" ? login : signup;
+
+    // Execute login/signup function
+    try {
+      await formAction(new FormData(event.currentTarget));
+    } catch (error) {
+      console.error("Authentication error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Box className={styles.authContainer}>
       <Title order={2} className={styles.title}>
         {authMode === "sign_in" ? "Sign In" : "Sign Up"}
       </Title>
-      <form className={styles.form}>
+
+      <form className={styles.form} onSubmit={handleSubmit}>
         {authMode === "sign_up" && (
           <TextInput
             label="First Name"
@@ -61,26 +80,22 @@ const Auth: React.FC = () => {
             className={styles.input}
           />
         )}
-        {authMode === "sign_in" ? (
-          <Button
-            type="submit"
-            formAction={login}
-            fullWidth
-            className={styles.submitButton}
-          >
-            Sign In
-          </Button>
-        ) : (
-          <Button
-            type="submit"
-            formAction={signup}
-            fullWidth
-            className={styles.submitButton}
-          >
-            Sign Up
-          </Button>
-        )}
+        <Button
+          type="submit"
+          fullWidth
+          className={styles.submitButton}
+          disabled={loading}
+        >
+          {loading
+            ? authMode === "sign_in"
+              ? "Signing In..."
+              : "Signing Up..."
+            : authMode === "sign_in"
+            ? "Sign In"
+            : "Sign Up"}
+        </Button>
       </form>
+
       <Button
         variant="subtle"
         fullWidth
@@ -88,11 +103,13 @@ const Auth: React.FC = () => {
         onClick={() =>
           setAuthMode(authMode === "sign_in" ? "sign_up" : "sign_in")
         }
+        disabled={loading}
       >
         {authMode === "sign_in"
           ? "Don't have an account? Sign Up"
           : "Already have an account? Sign In"}
       </Button>
+
       {authMode === "sign_up" && (
         <Checkbox
           label="I agree to receive marketing emails"
