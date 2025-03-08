@@ -30,25 +30,24 @@ export async function login(formData: FormData) {
 }
 
 export async function signup(formData: FormData) {
-  const supabase = await createClient()
+  const supabase = await createClient();
 
   // Extract values from the form
-  const email = formData.get('email') as string
-  const password = formData.get('password') as string
-  const firstName = formData.get('firstName') as string
-  const phone = (formData.get('phone') as string) || null
-  // Checkbox returns a value only when checked, so we convert it to a boolean
-  const marketingConsent = formData.get('marketingConsent') ? true : false
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+  const firstName = formData.get("firstName") as string;
+  const phone = (formData.get("phone") as string) || null;
+  const marketingConsent = formData.get("marketingConsent") ? true : false;
 
-  // Create the user via Supabase Auth
-  const { error, data } = await supabase.auth.signUp({ email, password })
+  // ✅ Create the user via Supabase Auth
+  const { error, data } = await supabase.auth.signUp({ email, password });
   if (error) {
-    redirect('/error')
+    redirect("/error");
   }
 
-  // If a user is successfully created, insert a corresponding profile
+  // ✅ If user is successfully created, insert profile into Supabase
   if (data && data.user) {
-    const { error: profileError } = await supabase.from('profiles').insert([
+    const { error: profileError } = await supabase.from("profiles").insert([
       {
         id: data.user.id,
         email,
@@ -56,12 +55,28 @@ export async function signup(formData: FormData) {
         phone,
         marketing_consent: marketingConsent,
       },
-    ])
+    ]);
     if (profileError) {
-      redirect('/error')
+      redirect("/error");
     }
   }
 
-  revalidatePath('/')
-  redirect('/dashboard')
+  // ✅ Send user data to Klaviyo (Only if marketing consent is given)
+  if (marketingConsent) {
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/klaviyo`, {
+        method: "POST",
+        body: JSON.stringify({ email, firstName, phone }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (error) {
+      console.error("Klaviyo API Error:", error);
+    }
+  }
+
+  revalidatePath("/");
+  redirect("/dashboard");
 }
+
