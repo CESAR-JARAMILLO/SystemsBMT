@@ -5,7 +5,10 @@ export async function addUserToKlaviyo(profile: {
   marketing_consent: boolean 
 }) {
   const API_KEY = process.env.KLAVIYO_PRIVATE_API_KEY;
-  if (!API_KEY) throw new Error("Klaviyo API key is missing");
+  if (!API_KEY) {
+    console.error("❌ Missing KLAVIYO_PRIVATE_API_KEY in production!");
+    throw new Error("Klaviyo API key is missing.");
+  }
 
   const url = 'https://a.klaviyo.com/api/profiles';
   const body = JSON.stringify({
@@ -18,7 +21,6 @@ export async function addUserToKlaviyo(profile: {
         properties: {
           marketing_consent: profile.marketing_consent,
           signup_source: "Signup Form",
-          // signup_date: new Date().toISOString(),
         },
       },
     },
@@ -42,16 +44,23 @@ export async function addUserToKlaviyo(profile: {
     const json = await response.json();
 
     if (!response.ok) {
+      // ✅ Handle case where user already exists in Klaviyo
+      if (json.errors && json.errors[0]?.code === "already_exists") {
+        console.warn("⚠️ User already exists in Klaviyo:", profile.email);
+        return json;
+      }
+
       console.error("❌ Klaviyo API Error:", JSON.stringify(json, null, 2));
       throw new Error(`Failed to add user to Klaviyo: ${json.detail || response.statusText}`);
     }
 
-    // ✅ Log the entire properties object properly
-    if (json.data?.attributes?.properties) {
-      console.log("✅ Klaviyo Properties:", JSON.stringify(json.data.attributes.properties, null, 2));
-    } else {
-      console.log("⚠️ No properties found in Klaviyo response.");
-    }
+    // ✅ Confirm success and log returned profile data
+    console.log("✅ Successfully added profile to Klaviyo:", {
+      email: json.data?.attributes?.email,
+      phone_number: json.data?.attributes?.phone_number,
+      first_name: json.data?.attributes?.first_name,
+      properties: json.data?.attributes?.properties,
+    });
 
     return json;
   } catch (error) {
