@@ -39,7 +39,7 @@ export async function signup(formData: FormData) {
 
   const { error, data } = await supabase.auth.signUp({ email, password });
   if (error) {
-    redirect("/error");
+    return { success: false, message: "Signup failed" };
   }
 
   if (data && data.user) {
@@ -52,24 +52,28 @@ export async function signup(formData: FormData) {
       },
     ]);
     if (profileError) {
-      redirect("/error");
+      return { success: false, message: "Profile creation failed" };
     }
   }
 
   // ✅ Send user data to Klaviyo
   try {
-    await fetch("/api/klaviyo", {
+    const klaviyoRes = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/klaviyo`, {
       method: "POST",
       body: JSON.stringify({ email, firstName, phone }),
       headers: {
         "Content-Type": "application/json",
       },
     });
+
+    const klaviyoData = await klaviyoRes.json();
+    if (!klaviyoRes.ok) {
+      console.error("Klaviyo API Error:", klaviyoData);
+    }
   } catch (error) {
-    console.error("Klaviyo API Error:", error);
+    console.error("Klaviyo API Request Failed:", error);
   }
 
   revalidatePath("/");
-  redirect("/dashboard");
+  return { success: true, message: "Signup successful" };
 }
-

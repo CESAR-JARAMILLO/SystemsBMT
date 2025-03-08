@@ -8,6 +8,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
+    // ✅ Ensure correct API key and List ID
     const KLAVIYO_API_KEY = process.env.KLAVIYO_PRIVATE_API_KEY;
     const KLAVIYO_LIST_ID = process.env.KLAVIYO_LIST_ID;
 
@@ -19,36 +20,40 @@ export async function POST(req: Request) {
       );
     }
 
+    // ✅ Use the latest Klaviyo API for adding a profile to a list
     const response = await fetch(
-      `https://a.klaviyo.com/api/lists/${KLAVIYO_LIST_ID}/members/`,
+      `https://a.klaviyo.com/api/lists/${KLAVIYO_LIST_ID}/relationships/profiles/`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${KLAVIYO_API_KEY}`,
+          Authorization: `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
         },
         body: JSON.stringify({
-          data: {
-            type: "list-member",
-            attributes: {
-              profiles: [
-                {
-                  email,
-                  first_name: firstName || "",
-                  phone_number: phone || "",
+          data: [
+            {
+              type: "profile",
+              attributes: {
+                email: email,
+                first_name: firstName || "",
+                phone_number: phone || "",
+                properties: {
+                  source: "Website Signup",
+                  joined_at: new Date().toISOString(),
                 },
-              ],
+              },
             },
-          },
+          ],
         }),
       }
     );
 
+    // ✅ Handle response
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Klaviyo API Error:", errorData);
       return NextResponse.json(
-        { error: errorData.message || "Failed to subscribe user" },
+        { error: "Failed to subscribe user", details: errorData },
         { status: response.status }
       );
     }
