@@ -15,17 +15,22 @@ import { login, signup } from "@/app/auth/action";
 const Auth: React.FC = () => {
   const [authMode, setAuthMode] = useState<"sign_in" | "sign_up">("sign_in");
   const [loading, setLoading] = useState(false);
+  const [marketingConsent, setMarketingConsent] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+
+    // ✅ Ensure checkbox value is added to FormData
+    const formData = new FormData(event.currentTarget);
+    formData.set("marketingConsent", marketingConsent.toString());
 
     // Determine which function to use
     const formAction = authMode === "sign_in" ? login : signup;
 
     // Execute login/signup function
     try {
-      await formAction(new FormData(event.currentTarget));
+      await formAction(formData);
     } catch (error) {
       console.error("Authentication error:", error);
     } finally {
@@ -80,6 +85,16 @@ const Auth: React.FC = () => {
             className={styles.input}
           />
         )}
+        {authMode === "sign_up" && (
+          <Checkbox
+            label="I agree to receive marketing emails"
+            name="marketingConsent"
+            checked={marketingConsent}
+            onChange={(event) =>
+              setMarketingConsent(event.currentTarget.checked)
+            }
+          />
+        )}
         <Button
           type="submit"
           fullWidth
@@ -109,14 +124,6 @@ const Auth: React.FC = () => {
           ? "Don't have an account? Sign Up"
           : "Already have an account? Sign In"}
       </Button>
-
-      {authMode === "sign_up" && (
-        <Checkbox
-          label="I agree to receive marketing emails"
-          name="marketingConsent"
-          className={styles.checkbox}
-        />
-      )}
     </Box>
   );
 };

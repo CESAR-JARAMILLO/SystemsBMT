@@ -1,51 +1,61 @@
-export interface KlaviyoProfile {
-  id: string;
-  type: string;
-  attributes: {
-    email: string;
-    first_name?: string;
-    last_name?: string;
-    phone_number?: string;
-    created?: string;
-  };
-}
-
-interface KlaviyoApiResponse {
-  data: KlaviyoProfile[];
-  links?: {
-    next?: string;
-  };
-}
-
-export async function fetchAllProfiles(): Promise<KlaviyoProfile[]> {
+export async function addUserToKlaviyo(profile: { 
+  email: string; 
+  first_name?: string; 
+  phone_number?: string | null; 
+  marketing_consent: boolean 
+}) {
   const API_KEY = process.env.KLAVIYO_PRIVATE_API_KEY;
-  const BASE_URL = 'https://a.klaviyo.com/api/profiles?page[size]=100';
+  if (!API_KEY) throw new Error("Klaviyo API key is missing");
 
-  if (!API_KEY) throw new Error('Klaviyo API key is missing');
-
-  let allProfiles: KlaviyoProfile[] = [];
-  let nextPageUrl: string | null = BASE_URL;
-
-  while (nextPageUrl) {
-    const response: Response = await fetch(nextPageUrl, {
-      method: 'GET',
-      headers: {
-        accept: 'application/vnd.api+json',
-        revision: '2024-02-01',
-        Authorization: `Klaviyo-API-Key ${API_KEY}`,
+  const url = 'https://a.klaviyo.com/api/profiles';
+  const body = JSON.stringify({
+    data: {
+      type: "profile",
+      attributes: {
+        email: profile.email,
+        phone_number: profile.phone_number || undefined,
+        first_name: profile.first_name || undefined,
+        properties: {
+          marketing_consent: profile.marketing_consent,
+          signup_source: "Signup Form",
+          // signup_date: new Date().toISOString(),
+        },
       },
-    });
+    },
+  });
+
+  console.log("🚀 Sending to Klaviyo:", JSON.stringify(body, null, 2));
+
+  const options = {
+    method: 'POST',
+    headers: {
+      accept: 'application/vnd.api+json',
+      revision: '2025-01-15',
+      'content-type': 'application/vnd.api+json',
+      Authorization: `Klaviyo-API-Key ${API_KEY}`,
+    },
+    body,
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const json = await response.json();
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch profiles: ${response.statusText}`);
+      console.error("❌ Klaviyo API Error:", JSON.stringify(json, null, 2));
+      throw new Error(`Failed to add user to Klaviyo: ${json.detail || response.statusText}`);
     }
 
-    const data: KlaviyoApiResponse = await response.json(); // Now data is properly typed
-    allProfiles = [...allProfiles, ...data.data];
+    // ✅ Log the entire properties object properly
+    if (json.data?.attributes?.properties) {
+      console.log("✅ Klaviyo Properties:", JSON.stringify(json.data.attributes.properties, null, 2));
+    } else {
+      console.log("⚠️ No properties found in Klaviyo response.");
+    }
 
-    // Check if there's a next page
-    nextPageUrl = data.links?.next || null;
+    return json;
+  } catch (error) {
+    console.error("❌ Error adding user to Klaviyo:", error);
+    throw new Error("Failed to add user to Klaviyo.");
   }
-
-  return allProfiles;
 }
