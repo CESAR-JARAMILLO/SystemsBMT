@@ -19,27 +19,27 @@ export async function POST(req: Request) {
       );
     }
 
-    // ✅ Send user data to Klaviyo API
     const response = await fetch(
-      `https://a.klaviyo.com/api/v2/list/${KLAVIYO_LIST_ID}/subscribe`,
+      `https://a.klaviyo.com/api/lists/${KLAVIYO_LIST_ID}/members/`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
+          Authorization: `Bearer ${KLAVIYO_API_KEY}`,
         },
         body: JSON.stringify({
-          profiles: [
-            {
-              email,
-              first_name: firstName || "",
-              phone_number: phone || "",
-              properties: {
-                source: "Website Signup",
-                joined_at: new Date().toISOString(),
-              },
+          data: {
+            type: "list-member",
+            attributes: {
+              profiles: [
+                {
+                  email,
+                  first_name: firstName || "",
+                  phone_number: phone || "",
+                },
+              ],
             },
-          ],
+          },
         }),
       }
     );
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       const errorData = await response.json();
       console.error("Klaviyo API Error:", errorData);
       return NextResponse.json(
-        { error: "Failed to subscribe user" },
+        { error: errorData.message || "Failed to subscribe user" },
         { status: response.status }
       );
     }
