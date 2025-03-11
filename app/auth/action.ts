@@ -89,7 +89,7 @@ export async function signup(formData: FormData) {
       await addUserToKlaviyo({
         email,
         first_name: firstName,
-        phone_number, // ✅ Corrected phone format
+        phone_number,
         marketing_consent: marketingConsent,
       });
       console.log("✅ Successfully added to Klaviyo!");
