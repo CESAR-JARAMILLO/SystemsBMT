@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
-import { addUserToKlaviyo } from '@/lib/klaviyo'
+import { addUserToKlaviyo, subscribeProfilesToKlaviyoList } from '@/lib/klaviyo'
 
 export async function login(formData: FormData) {
   const supabase = await createClient()
@@ -95,6 +95,16 @@ export async function signup(formData: FormData) {
       console.log("✅ Successfully added to Klaviyo!");
     } catch (klaviyoError) {
       console.error("❌ Error adding user to Klaviyo:", klaviyoError);
+    }
+
+    // ✅ Add user to Klaviyo List
+    try {
+      await subscribeProfilesToKlaviyoList({
+        email,
+      });
+      console.log("✅ Successfully added to Klaviyo List!");
+    } catch (klaviyoError) {
+      console.error("❌ Error adding user to Klaviyo List:", klaviyoError);
     }
   }
 

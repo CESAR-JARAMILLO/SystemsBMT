@@ -68,3 +68,71 @@ export async function addUserToKlaviyo(profile: {
     throw new Error("Failed to add user to Klaviyo.");
   }
 }
+
+export async function subscribeProfilesToKlaviyoList(profile: { email: string }) {
+  const API_KEY = process.env.KLAVIYO_PRIVATE_API_KEY;
+  const LIST_ID = process.env.KLAVIYO_LIST_ID;
+
+  if (!API_KEY) throw new Error("Klaviyo API key is missing.");
+  if (!LIST_ID) throw new Error("Klaviyo List ID is missing.");
+
+  const body = JSON.stringify({
+    data: {
+      type: "profile-subscription-bulk-create-job",
+      attributes: {
+        profiles: {
+          data: [
+            {
+              type: "profile",
+              attributes: {
+                email: profile.email,
+                subscriptions: {
+                  email: { marketing: { consent: "SUBSCRIBED" } },
+                },
+              },
+            },
+          ],
+        },
+        historical_import: false,
+      },
+      relationships: {
+        list: { data: { type: "list", id: LIST_ID } },
+      },
+    },
+  });
+
+  const options = {
+    method: 'POST',
+    headers: {
+      accept: 'application/vnd.api+json',
+      revision: '2025-01-15',
+      'content-type': 'application/vnd.api+json',
+      Authorization: `Klaviyo-API-Key ${API_KEY}`,
+    },
+    body,
+  };
+
+  try {
+    const response = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs', options);
+
+    const text = await response.text();
+    
+    // ✅ Handle cases where Klaviyo returns an empty response
+    if (!text) {
+      console.log("✅ Klaviyo request successful but returned an empty response (Double Opt-In likely enabled).");
+      return { success: true, message: "User invited to confirm subscription via email." };
+    }
+
+    const json = JSON.parse(text);
+
+    if (!response.ok) {
+      throw new Error(`Failed to add user to Klaviyo: ${JSON.stringify(json)}`);
+    }
+
+    console.log("✅ Successfully added to Klaviyo List!");
+    return json;
+  } catch (error) {
+    console.error("❌ Error subscribing profile to Klaviyo:", error);
+    throw new Error("Failed to process Klaviyo subscription.");
+  }
+}
