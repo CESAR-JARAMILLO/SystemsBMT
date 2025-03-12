@@ -1,5 +1,11 @@
 "use client";
 
+// TODO: Implement admin approval system:
+// 1. Store new users in `pending_users` instead of Supabase Auth.
+// 2. Notify admin to review and approve users.
+// 3. On approval, move user to Supabase Auth and `profiles` table.
+// 4. Add approved user to Klaviyo list.
+
 import React, { useState } from "react";
 import {
   Box,
