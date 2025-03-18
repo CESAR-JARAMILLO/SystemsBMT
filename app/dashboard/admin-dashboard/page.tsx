@@ -8,7 +8,7 @@ import styles from "./page.module.css";
 export default async function AdminDashboard() {
   const supabase = await createClient();
 
-  // Check if user is logged in
+  // ✅ Ensure user is logged in
   const {
     data: { user },
     error: userError,
@@ -17,32 +17,36 @@ export default async function AdminDashboard() {
     redirect("/auth");
   }
 
-  // Check if the user is an admin
+  // ✅ Ensure user is an admin
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("is_admin")
     .eq("id", user.id)
     .single();
 
-  if (profileError || !profile || !profile.is_admin) {
-    redirect("/auth");
+  if (profileError || !profile?.is_admin) {
+    redirect("/dashboard");
   }
 
-  // Fetch all user profiles from the "profiles" table
-  const { data: profiles, error: profilesError } = await supabase
+  // ✅ Fetch all **unapproved** users
+  const { data: pendingUsers, error: pendingError } = await supabase
     .from("profiles")
-    .select("*");
+    .select("*")
+    .eq("approved", false); // ✅ Only users waiting for approval
 
-  if (profilesError) {
-    throw new Error(profilesError.message);
+  if (pendingError) {
+    throw new Error(pendingError.message);
   }
 
+  console.log("✅ Unapproved Users:", pendingUsers); // Debugging Log
+
+  // Remove the onApprove prop since we're using form submissions in AdminTable
   return (
     <Box className={styles.adminDasboardPage}>
       <Title c={"#fff"} order={2}>
         Admin Dashboard
       </Title>
-      <AdminTable profiles={profiles} />
+      <AdminTable pendingUsers={pendingUsers} />
     </Box>
   );
 }

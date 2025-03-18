@@ -1,23 +1,61 @@
+/* AdminTable.module.css */
+
+/* Scroll container for the table */
+.scrollArea {
+  overflow-x: auto;
+  padding: 1rem;
+  background-color: transparent; /* A contrasting light background for the table container */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+/* Table styling */
 .table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+/* Table header */
+.thead {
+  background-color: #3A506B;
   color: #fff;
 }
 
-.header {
-  position: sticky;
-  top: 0;
-  /* background-color: var(--mantine-color-body); */
-  transition: box-shadow 150ms ease;
+.tr {
+  border-bottom: 1px solid #ddd;
 }
 
-.header::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-bottom: 1px solid var(--mantine-color-gray-2);
+/* Header cells and data cells */
+.th,
+.td {
+  padding: 0.75rem 1rem;
+  text-align: left;
 }
 
-.scrolled {
-  box-shadow: var(--mantine-shadow-sm);
+/* Alternate row styling for better readability */
+.tbody tr:nth-child(odd) {
+  background-color: #f0f4f8; /* Light blue-gray */
+  color: #3A506B;
+}
+
+.tbody tr:nth-child(even) {
+  background-color: #e0e7ef; /* Slightly darker light blue-gray */
+  color: #3A506B;
+}
+
+/* Approve button styling */
+.button {
+  padding: 0.5rem 1rem;
+  background-color: #3A506B;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #2e3e55; /* A slightly darker variant for hover */
 }
