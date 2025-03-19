@@ -1,4 +1,4 @@
-// components/Admin/AdminTable.server.tsx
+// refresh table after approval
 import { Box } from "@mantine/core";
 import styles from "./AdminTable.module.css";
 import { approveUser } from "@/app/auth/action";
