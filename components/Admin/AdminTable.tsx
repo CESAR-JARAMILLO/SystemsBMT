@@ -7,7 +7,7 @@ interface Profile {
   id: string;
   email: string;
   first_name: string;
-  phone?: string;
+  phone_number?: string;
   created_at: string;
   approved: boolean;
 }
@@ -34,7 +34,7 @@ export default function AdminTable({ pendingUsers }: AdminTableProps) {
             <tr key={user.id} className={styles.tr}>
               <td className={styles.td}>{user.first_name}</td>
               <td className={styles.td}>{user.email}</td>
-              <td className={styles.td}>{user.phone || "N/A"}</td>
+              <td className={styles.td}>{user.phone_number || "N/A"}</td>
               <td className={styles.td}>
                 {new Date(user.created_at).toLocaleString()}
               </td>
