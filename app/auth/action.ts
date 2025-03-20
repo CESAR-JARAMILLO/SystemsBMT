@@ -167,4 +167,6 @@ export async function approveUser(formData: FormData): Promise<void> {
     console.error("❌ Error subscribing user to Klaviyo List:", klaviyoError);
     throw new Error("Error subscribing user to Klaviyo list: " + klaviyoError.message);
   }
+
+  redirect("/dashboard/admin-dashboard");
 }
