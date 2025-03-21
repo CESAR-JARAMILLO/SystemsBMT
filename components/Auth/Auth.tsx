@@ -91,7 +91,7 @@ const Auth: React.FC = () => {
             className={styles.input}
           />
         )}
-        {authMode === "sign_up" && (
+        {/* {authMode === "sign_up" && (
           <Checkbox
             label="I agree to receive marketing emails"
             name="marketingConsent"
@@ -100,7 +100,7 @@ const Auth: React.FC = () => {
               setMarketingConsent(event.currentTarget.checked)
             }
           />
-        )}
+        )} */}
         <Button
           type="submit"
           fullWidth
