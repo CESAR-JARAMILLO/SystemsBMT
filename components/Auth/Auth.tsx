@@ -1,14 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Box,
-  TextInput,
-  PasswordInput,
-  Button,
-  Title,
-  Checkbox,
-} from "@mantine/core";
+import { Box, TextInput, PasswordInput, Button, Title } from "@mantine/core";
 import styles from "./Auth.module.css";
 import { login, signup } from "@/app/auth/action";
 
